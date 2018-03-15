@@ -1,0 +1,65 @@
+@import 'normalize';
+@import 'compass/reset';
+
+//COMPONENTES
+@import 'partials/base';
+
+@import 'partials/owl-carousel';
+@import 'partials/button';
+@import 'partials/input';
+
+@import 'partials/header';
+@import 'partials/footer';
+
+$icon: sprite-map('common-icons/*.png');
+
+@include border-box-sizing;
+
+html, body{
+    &.menu-active{ 
+        overflow: hidden;          
+    }
+}
+
+html{
+    overflow-x: hidden;          
+}
+
+body {
+    line-height: 1.5;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+}
+
+a {
+    color: $cor-secundaria;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+.clearfix {
+    &:before,
+        &:after {
+        content: ' ';
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.container {
+    @include container($max-width); 
+}
+
+.hidden{
+    display: none;
+}
+
+strong{
+    font-weight: bold;
+}

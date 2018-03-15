@@ -1,0 +1,97 @@
+@import "compass";
+@import "susy";
+@import "breakpoint";
+
+//Variáveis globais
+$max-width: 1240px !default;
+$break-min-big: (min-width $max-width) !default;
+$break-big: (max-width $max-width) !default;   
+$break-medium-big: (max-width 1024px) !default; 
+$break-medium: (max-width 800px) !default; 
+$break-small: (max-width 520px) !default;
+$break-smaller: (max-width 380px) !default; 
+ 
+//Cores default, devem ser alteradas confome o projeto
+
+$cor-base: #000000 !default;
+$cor-primaria: #ffffff !default; 
+$cor-secundaria: #1e2021 !default;  
+$cor-bordas: #e1e1e1 !default;   
+$cor-texto: #252525 !default;    
+$cor-texto-secundario: #666666 !default; 
+
+$cor-border-light: lighten($cor-bordas, 10); 
+$cor-base-darken: darken($cor-base, 10); 
+$cor-base-darken-strong: darken($cor-base, 20);  
+
+@mixin location($top, $right: $top, $bottom: $top, $left: $right) {
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+//Função para centralizar div
+@mixin center($type: 'both') {
+    position: absolute;
+    @if $type == 'both' {
+        @include location(0);
+        margin: auto;
+    }
+    
+    @if $type == 'vert' {
+        @include location(0,null);
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    
+    @if $type == 'horz' {
+        @include location(null,0);
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@mixin clip-path($clip) {
+    -webkit-clip-path: $clip;
+    -moz-clip-path: $clip;
+    -ms-clip-path: $clip;
+    clip-path: $clip;
+}
+
+//Usado para videos responsivos do YouTube
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+    
+    &:before {
+        display: block;
+        width: 100%;
+        padding-top: ($height / $width) * 100%;
+        content: "";
+    }
+    
+    > .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+//Corversor px to em
+$pixel-base: 16;
+
+@function em($pixels, $contexto: $pixel-base) {
+   //se existir o pixel passado como parametro
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  //se existir pixel base definido
+  @if (unitless($contexto)) {
+    $contexto: $contexto * 1px;
+  }
+
+  @return $pixels / $contexto * 1em;
+}
